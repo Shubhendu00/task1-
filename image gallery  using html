@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <style>
+        .gallery-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .image-viewer img {
+            max-width: 80%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .thumbnail-container {
+            margin-top: 20px;
+        }
+
+        .thumbnail {
+            width: 150px;
+            height: 100px;
+            margin: 5px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .thumbnail:hover {
+            transform: scale(1.1);
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="gallery-container">
+        <div class="image-viewer">
+            <img id="currentImage" src="https://images.pexels.com/photos/414171/pexels-photo-414171.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="Gallery Image">
+        </div>
+        <div class="thumbnail-container">
+            <img class="thumbnail" src="https://images.pexels.com/photos/414171/pexels-photo-414171.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=100&w=150" onclick="changeImage('https://images.pexels.com/photos/414171/pexels-photo-414171.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940')">
+            <img class="thumbnail" src="https://images.unsplash.com/photo-1519681393784-d120267933ba?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" onclick="changeImage('https://images.unsplash.com/photo-1519681393784-d120267933ba?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')">
+            <img class="thumbnail" src="https://images.pexels.com/photos/110854/pexels-photo-110854.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=100&w=150" onclick="changeImage('https://images.pexels.com/photos/110854/pexels-photo-110854.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940')">
+            <img class="thumbnail" src="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" onclick="changeImage('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')">
+        </div>
+    </div>
+
+    <button id="prevBtn" onclick="prevImage()">Previous</button>
+    <button id="nextBtn" onclick="nextImage()">Next</button>
+
+    <script>
+        const imagePaths = [
+            'https://images.pexels.com/photos/414171/pexels-photo-414171.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+            'https://images.unsplash.com/photo-1519681393784-d120267933ba?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
+            'https://images.pexels.com/photos/110854/pexels-photo-110854.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+            'https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80'
+        ];
+
+        let currentIndex = 0;
+
+        function changeImage(path) {
+            document.getElementById('currentImage').src = path;
+            currentIndex = imagePaths.indexOf(path);
+        }
+
+        function prevImage() {
+            currentIndex = (currentIndex === 0) ? imagePaths.length - 1 : currentIndex - 1;
+            document.getElementById('currentImage').src = imagePaths[currentIndex];
+        }
+
+        function nextImage() {
+            currentIndex = (currentIndex === imagePaths.length - 1) ? 0 : currentIndex + 1;
+            document.getElementById('currentImage').src = imagePaths[currentIndex];
+        }
+    </script>
+
+</body>
+</html>
